@@ -23,6 +23,11 @@
 #include "RREF.hpp"
 #endif
 
+#ifndef HEADER_ERROR
+#define HEADER_ERROR
+#include "ERROR.hpp"
+#endif
+
 using namespace std;
 
 template <typename T>
@@ -46,8 +51,9 @@ int main()
         log << RREF(data);
         cout << log;
     }
-    catch (const char *&e)
+    catch (ERROR *&e)
     {
-        std::cerr << e << std::endl;
+        std::cerr << log;
+        std::cerr << *e;
     }
 }

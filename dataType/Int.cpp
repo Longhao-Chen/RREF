@@ -18,6 +18,11 @@
 #include <iostream>
 #endif
 
+#ifndef HEADER_ERROR
+#define HEADER_ERROR
+#include "ERROR.hpp"
+#endif
+
 dataType::Int::Int()
 {
     this->data = 0;
@@ -32,7 +37,7 @@ dataType::Int::Int(int in)
 int dataType::Int::get_k(const Int &t) const
 {
     if (t.data == 0)
-        throw "In get_k t.data == 0";
+        throw new ERROR("In get_k t.data == 0");
     int tmp;
     tmp = this->data % t.data;
     return (this->data - tmp) / t.data;
@@ -79,7 +84,7 @@ dataType::Int dataType::Int::operator*(const int t) const
 dataType::Int dataType::Int::operator/(const dataType::Int &t) const
 {
     if (t.data == 0)
-        throw "In /(Int) t.data == 0";
+        throw new ERROR("In /(Int) t.data == 0");
     dataType::Int res;
     if (this->data % t.data == 0)
     {
@@ -88,14 +93,14 @@ dataType::Int dataType::Int::operator/(const dataType::Int &t) const
     }
     else
     {
-        throw "this->data % t.data != 0";
+        throw new ERROR(std::to_string(this->data) + " % " + std::to_string(t.data) + "!= 0");
     }
 }
 
 dataType::Int dataType::Int::operator/(const int t) const
 {
     if (t == 0)
-        throw "In / t == 0";
+        throw new ERROR("In / t == 0");
     dataType::Int res;
     if (this->data % t == 0)
     {
@@ -104,14 +109,14 @@ dataType::Int dataType::Int::operator/(const int t) const
     }
     else
     {
-        throw "this->data % t != 0";
+        throw new ERROR(std::to_string(this->data) + " % " + std::to_string(t) + "!= 0");
     }
 }
 
 dataType::Int dataType::Int::operator%(const dataType::Int &t) const
 {
     if (t.data == 0)
-        throw "In % t.data == 0";
+        throw new ERROR("In % t.data == 0");
     dataType::Int res;
     res.data = this->data % t.data;
     return res;

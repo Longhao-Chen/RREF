@@ -1,6 +1,6 @@
 /*
-* 此文件将被包含到 Matrix.hpp 中，由此不需要也无法单独编译
-*/
+ * 此文件将被包含到 Matrix.hpp 中，由此不需要也无法单独编译
+ */
 #ifndef HEADER_MATRIX
 #define HEADER_MATRIX
 #include "Matrix.hpp"
@@ -19,6 +19,11 @@
 #ifndef HEADER_IOSTREAM
 #define HEADER_IOSTREAM
 #include <iostream>
+#endif
+
+#ifndef HEADER_ERROR
+#define HEADER_ERROR
+#include "ERROR.hpp"
 #endif
 
 // 构造矩阵，输入行和列
@@ -42,7 +47,7 @@ template <class T>
 const latexOutput::swap dataType::Matrix<T>::swap(int a, int b)
 {
     if (a >= this->r || b >= this->r)
-        throw "In swap a>=this->r || b>=this->r";
+        throw new ERROR("In swap " + std::to_string(a) + ">=this->r || " + std::to_string(b) + ">=this->r");
 
     T tmp;
     for (int i = 0; i < this->c; ++i)
@@ -69,7 +74,7 @@ template <class T>
 const latexOutput::rowSum dataType::Matrix<T>::rowSum(T k, int r1, int r2)
 {
     if (r1 >= this->r || r2 >= this->r)
-        throw "In rowSum a>=this->r || b>=this->r";
+        throw new ERROR("In rowSum a>=this->r || b>=this->r");
 
     T tmp;
     for (int i = 0; i < this->c; ++i)
@@ -96,7 +101,7 @@ template <class T>
 const latexOutput::rowMul dataType::Matrix<T>::rowMul(T k, int r)
 {
     if (r >= this->r)
-        throw "In rowMul r >= this->r";
+        throw new ERROR("In rowMul r >= this->r");
 
     for (int i = 0; i < this->c; ++i)
         this->set(this->get(r, i) * k, r, i);
@@ -116,7 +121,7 @@ template <class T>
 const latexOutput::rowDiv dataType::Matrix<T>::rowDiv(T k, int r)
 {
     if (r >= this->r)
-        throw "In rowDiv r >= this->r";
+        throw new ERROR("In rowDiv r >= this->r");
 
     for (int i = 0; i < this->c; ++i)
         this->set(this->get(r, i) / k, r, i);
@@ -130,7 +135,7 @@ template <class T>
 void dataType::Matrix<T>::set(T in, int r, int c)
 {
     if (r >= this->r || c >= this->c)
-        throw "In set r>=this->r||c>=this->c";
+        throw new ERROR("In set r>=this->r||c>=this->c");
 
     root[r * this->c + c] = in;
 }
@@ -140,7 +145,7 @@ template <class T>
 const T dataType::Matrix<T>::get(int r, int c) const
 {
     if (r >= this->r || c >= this->c)
-        throw "In get r>=this->r||c>=this->c";
+        throw new ERROR("In get r>=this->r||c>=this->c");
 
     return root[r * this->c + c];
 }
@@ -158,7 +163,6 @@ int dataType::Matrix<T>::getCol() const
 {
     return this->c;
 }
-
 
 //矩阵的输入
 template <typename T>
@@ -186,7 +190,6 @@ std::ostream &operator<<(std::ostream &out, const dataType::Matrix<T> &t)
     }
     return out;
 }
-
 
 // 输出到日志
 template <typename T>
