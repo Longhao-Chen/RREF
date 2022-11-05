@@ -1,5 +1,5 @@
 # RREF
-将矩阵化简为简化梯形阵，并使用`Latex`输出化简过程。此程序的目的是练习`C++`和项目维护。
+将矩阵化简为简化阶梯型，并使用`Latex`输出化简过程。此程序的目的是练习`C++`和项目维护。
 
 * 目前只实现整数运算
 
@@ -136,7 +136,7 @@ latexOutput::log &operator<<(latexOutput::log &out, const dataType::Matrix<T> &t
 ### 算法层
 目前提供的接口有：
 ```
-// 将data化简到简化梯形阵
+// 将data化简到简化阶梯型
 latexOutput::log RREF(dataType::Matrix<T> &data)
 ```
 
